@@ -1,0 +1,71 @@
+// Описаний у документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+const gallery = document.querySelector('.gallery');
+console.log(gallery);
+gallery.style.display = 'grid';
+gallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+gallery.style.gap = '16px';
+gallery.style.padding = '16px';
+
+export function displayImages(images) {
+    if (!Array.isArray(images)) {
+        console.error('displayImages expects an array but received:', images);
+        return;
+    }
+    const imageResults = document.getElementById('imageResults');
+    imageResults.innerHTML = '';
+
+    images.forEach(image => {
+        const imgElement = document.createElement('a');
+        imgElement.classList.add('image-card');
+        imgElement.href = image.largeImageURL;
+        imgElement.innerHTML = `
+            
+            <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy">
+            
+            <div class="info">
+                <p><b>Likes:</b> ${image.likes}</p>
+                <p><b>Views:</b> ${image.views}</p>
+                <p><b>Comments:</b> ${image.comments}</p>
+                <p><b>Downloads:</b> ${image.downloads}</p>
+            </div>`;
+        imageResults.appendChild(imgElement);
+
+
+        const cardStyle = imgElement;
+        cardStyle.style.position = 'relative';
+        cardStyle.style.overflow = 'hidden';
+        cardStyle.style.borderRadius = '8px';
+        cardStyle.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+
+        const cardInfo = imgElement.querySelector('.info');
+        cardInfo.style.position = 'absolute';
+        cardInfo.style.bottom = '0';
+        cardInfo.style.left = '0';
+        cardInfo.style.right = '0';
+        cardInfo.style.padding = '8px';
+        cardInfo.style.background = 'rgba(0, 0, 0, 0.6)';
+        cardInfo.style.color = '#fff';
+        cardInfo.style.fontSize = '14px';
+});
+
+    const lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+    });
+    lightbox.refresh();
+   
+}
+
+
+
+
+
+
+
+
+
+
