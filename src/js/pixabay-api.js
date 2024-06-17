@@ -18,7 +18,8 @@ export default function getImages(apiKey, userInput) {
     });
     const url = `${BASE_URL}${END_POINT}?${params}`;
     
-    
+    showLoader();
+   
     return fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -40,12 +41,21 @@ export default function getImages(apiKey, userInput) {
             iziToast.error({
                 title: 'Error',
                 message: 'An error occurred while fetching images. Please try again!',
+            }).finally(() => {
+                hideLoader();
             });
-            // console.error('Error fetching images:', error);
         });
+        
 }
 
+const loader = document.querySelector('.loader');
+function showLoader() {
+  loader.classList.remove('hidden')  
+}
 
+function hideLoader() {
+   loader.classList.add('hidden') 
+}
  
 
 
