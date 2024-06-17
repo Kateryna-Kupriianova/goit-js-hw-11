@@ -1,10 +1,9 @@
-// Описаний у документації
 import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const gallery = document.querySelector('.gallery');
-console.log(gallery);
 gallery.style.display = 'grid';
 gallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
 gallery.style.gap = '16px';
@@ -12,7 +11,12 @@ gallery.style.padding = '16px';
 
 export function displayImages(images) {
     if (!Array.isArray(images)) {
-        console.error('displayImages expects an array but received:', images);
+        iziToast.error({
+            title: 'Error',
+            message: 'displayImages expects an array but received:' + typeof images,
+        
+        });
+
         return;
     }
     const imageResults = document.getElementById('imageResults');
@@ -50,7 +54,7 @@ export function displayImages(images) {
         cardInfo.style.background = 'rgba(0, 0, 0, 0.6)';
         cardInfo.style.color = '#fff';
         cardInfo.style.fontSize = '14px';
-});
+    });
 
     const lightbox = new SimpleLightbox('.gallery a', {
         captionsData: 'alt',

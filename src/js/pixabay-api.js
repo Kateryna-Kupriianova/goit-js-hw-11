@@ -1,6 +1,6 @@
 import iziToast from  "izitoast" ;
 import "izitoast/dist/css/iziToast.min.css";
-
+import { displayImages } from "./render-functions";
 
 
 
@@ -19,7 +19,7 @@ export default function getImages(apiKey, userInput) {
     const url = `${BASE_URL}${END_POINT}?${params}`;
     
     
-    fetch(url)
+    return fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -41,7 +41,7 @@ export default function getImages(apiKey, userInput) {
                 title: 'Error',
                 message: 'An error occurred while fetching images. Please try again!',
             });
-            console.error('Error fetching images:', error);
+            // console.error('Error fetching images:', error);
         });
 }
 
