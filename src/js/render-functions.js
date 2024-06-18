@@ -64,7 +64,10 @@ export function displayImages(images) {
    
 }
 
-
+export function clearImages() {
+    const imageResults = document.getElementById('imageResults');
+    imageResults.innerHTML = '';
+}
 
 
 

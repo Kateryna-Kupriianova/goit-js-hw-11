@@ -1,6 +1,6 @@
 import iziToast from  "izitoast" ;
 import "izitoast/dist/css/iziToast.min.css";
-import { displayImages } from "./render-functions";
+import { displayImages, clearImages } from "./render-functions";
 
 
 
@@ -29,6 +29,7 @@ export default function getImages(apiKey, userInput) {
         })
         .then(data => {
             if (data.hits.length === 0) {
+                clearImages();
                 iziToast.error({
                     title: 'Error',
                     message: 'Sorry, there are no images matching your search query. Please try again!',
